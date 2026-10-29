@@ -1,4 +1,4 @@
-import Portrait from "@/components/ParticleSilhouette";
+import ParticleGlobe from "@/components/ParticleGlobe";
 import Cursor from "@/components/Cursor";
 import Navigation from "@/components/Navigation";
 import Motion from "@/components/Motion";
@@ -16,7 +16,7 @@ export default function Home() {
       <Navigation />
       <main>
         <section className="hero" id="home" aria-labelledby="hero-name">
-          <Portrait />
+          <ParticleGlobe />
           <div className="hero-copy hero-name">
             <p className="eyebrow">A WORK IN CURIOSITY</p>
             <h1 id="hero-name">Sai Madhav</h1>

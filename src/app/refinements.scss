@@ -1,4 +1,4 @@
-// Interaction and typography refinements for the silhouette edition.
+// Interaction and typography refinements.
 html,
 body {
   scrollbar-width: none;
@@ -7,16 +7,29 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
-.silhouette-fallback {
+.globe {
   position: absolute;
-  width: 70%;
-  height: 90%;
-  left: 15%;
-  bottom: 0;
-  opacity: 0.6;
+  inset: 10% 16% 5%;
+  pointer-events: none;
 }
-.portrait.ready .silhouette-fallback {
+.globe canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.globe-fallback {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  opacity: 0.3;
+}
+.globe.ready .globe-fallback {
   display: none;
+}
+.hero-coordinate {
+  top: 88px;
 }
 .hero-name h1 {
   font-size: clamp(25px, 2.7vw, 40px);
@@ -288,6 +301,14 @@ em {
   }
 }
 @media (max-width: 600px) {
+  .globe {
+    inset: 13% -4% 23%;
+  }
+  .hero-coordinate {
+    top: 80px;
+    font-size: 6px;
+    white-space: nowrap;
+  }
   html {
     scroll-padding-top: 100px;
   }
