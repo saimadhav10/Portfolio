@@ -1,4 +1,6 @@
-import Portrait from "@/components/Portrait";
+import Portrait from "@/components/ParticleSilhouette";
+import Cursor from "@/components/Cursor";
+import Navigation from "@/components/Navigation";
 import Motion from "@/components/Motion";
 import ContactForm from "@/components/ContactForm";
 import { projects, skills } from "@/lib/content";
@@ -7,25 +9,11 @@ export default function Home() {
   return (
     <>
       <Motion />
+      <Cursor />
       <a className="skip-link" href="#about">
         Skip to content
       </a>
-      <header className="header">
-        <a className="wordmark" href="#home" aria-label="Sai Madhav home">
-          sm<span>•</span>
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="#about">About</a>
-          <a href="#projects">
-            Projects <sup>02</sup>
-          </a>
-          <a href="#skills">Skills</a>
-          <a href="#resume">Résumé</a>
-          <a href="#contact" className="nav-contact">
-            Let’s connect <span>↗</span>
-          </a>
-        </nav>
-      </header>
+      <Navigation />
       <main>
         <section className="hero" id="home" aria-labelledby="hero-name">
           <Portrait />
@@ -255,29 +243,57 @@ export default function Home() {
           </div>
           <div className="resume-content" data-reveal>
             <div>
+              <p className="eyebrow">SAI_MADHAV / RÉSUMÉ.PDF</p>
               <h2 id="resume-title">
-                A little more
+                The story
                 <br />
-                <em>on paper.</em>
+                <em>so far.</em>
               </h2>
               <p>
                 My education, skills, and selected projects.
                 <br />
                 One page. Room to grow.
               </p>
+              <div className="resume-facts">
+                <span>01 PAGE</span>
+                <span>02 PROJECTS</span>
+                <span>CLASS OF ’29</span>
+              </div>
             </div>
-            <div className="resume-actions">
+            <div className="resume-document">
               <a
-                className="big-link"
+                className="resume-sheet"
                 href="/Sai-Madhav-Resume.pdf"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Preview Sai Madhav’s résumé"
               >
-                View résumé <span>↗</span>
+                <div className="sheet-top">
+                  <span>SM / 01</span>
+                  <span>↗</span>
+                </div>
+                <img
+                  src="/images/resume-preview.png"
+                  alt="One-page résumé preview: education, technical skills, and selected projects"
+                  loading="lazy"
+                />
+                <span className="sheet-bottom">
+                  OPEN DOCUMENT <span>↗</span>
+                </span>
               </a>
-              <a className="text-link" href="/Sai-Madhav-Resume.pdf" download>
-                Download PDF <span>↓</span>
-              </a>
+              <div className="resume-actions">
+                <a
+                  className="big-link"
+                  href="/Sai-Madhav-Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View résumé <span>↗</span>
+                </a>
+                <a className="text-link" href="/Sai-Madhav-Resume.pdf" download>
+                  Download PDF <span>↓</span>
+                </a>
+              </div>
             </div>
           </div>
         </section>

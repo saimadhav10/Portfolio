@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.scss";
+import "./refinements.scss";
 export const metadata: Metadata = {
   metadataBase: new URL("https://saimadhav1.runs-on.dev"),
   title: "Sai Madhav — Data, numbers & things I build",

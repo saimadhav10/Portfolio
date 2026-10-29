@@ -1,0 +1,394 @@
+// Interaction and typography refinements for the silhouette edition.
+html,
+body {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+.silhouette-fallback {
+  position: absolute;
+  width: 70%;
+  height: 90%;
+  left: 15%;
+  bottom: 0;
+  opacity: 0.6;
+}
+.portrait.ready .silhouette-fallback {
+  display: none;
+}
+.hero-name h1 {
+  font-size: clamp(25px, 2.7vw, 40px);
+  letter-spacing: -0.06em;
+}
+.hero-role {
+  font-size: 12px;
+}
+.statement {
+  font-size: clamp(30px, 4.4vw, 65px);
+  line-height: 1.3;
+}
+h2 {
+  font-size: clamp(36px, 5.3vw, 76px);
+  letter-spacing: -0.07em;
+}
+em {
+  font-family: inherit;
+  font-style: italic;
+}
+.flower-title,
+.coc-caption strong {
+  font-family: inherit;
+}
+.about-bottom > div p {
+  font-size: 14px;
+}
+.project-details > div > p:not(.eyebrow) {
+  font-size: 12px;
+}
+.contact-heading h2 {
+  font-size: clamp(55px, 9vw, 135px);
+}
+.contact-heading h2 > span {
+  font-family: inherit;
+}
+.header {
+  position: fixed;
+  top: 22px;
+  left: 4%;
+  width: 92%;
+  height: auto;
+  padding: 0;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 20;
+}
+.header > .wordmark {
+  pointer-events: auto;
+  font-size: 25px;
+  letter-spacing: -3px;
+  padding: 12px 15px;
+  border: 1px solid #ffffff15;
+  border-radius: 50px;
+  background: #27262cbb;
+  backdrop-filter: blur(18px);
+}
+.header nav {
+  pointer-events: auto;
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid #ffffff1c;
+  border-radius: 50px;
+  background: #222127b8;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 30px #00000013;
+}
+.header nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 40px;
+  font-size: 10px;
+  color: #aaa8af;
+  transition:
+    color 0.25s,
+    background 0.25s;
+}
+.header nav a:hover,
+.header nav a[aria-current] {
+  color: #efedf0;
+  background: #ffffff0d;
+}
+.header nav a[aria-current]::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d9d1ba;
+  box-shadow: 0 0 7px #d9d1ba88;
+}
+.header nav a:last-child {
+  color: #d5cebc;
+}
+.nav-index {
+  display: none;
+  font-size: 9px;
+  color: #87818e;
+}
+.menu-toggle {
+  display: none;
+}
+.custom-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.custom-cursor[data-visible="true"] {
+  opacity: 1;
+}
+.custom-cursor canvas {
+  position: absolute;
+  inset: 0;
+}
+.cursor-head {
+  --size: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2);
+  border-radius: 50%;
+  background: #eeedf0;
+  box-shadow: 0 0 10px 2px #eeedf0aa;
+  transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0);
+  transition:
+    width 0.25s,
+    height 0.25s,
+    margin 0.25s,
+    background 0.25s,
+    box-shadow 0.25s;
+}
+.custom-cursor[data-hover="true"] .cursor-head {
+  --size: 40px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px #eeedf0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-enabled,
+  .custom-cursor-enabled * {
+    cursor: none !important;
+  }
+}
+.resume {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 50%, #38353f 0, transparent 55%), #222127;
+}
+.resume::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#ffffff03 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff03 1px, transparent 1px);
+  background-size: 45px 45px;
+  pointer-events: none;
+}
+.resume .section-label,
+.resume-content {
+  position: relative;
+}
+.resume-content {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 12%;
+  align-items: center;
+}
+.resume-content h2 {
+  font-size: clamp(40px, 5vw, 72px);
+}
+.resume-content > .resume-document {
+  width: 100%;
+  max-width: 410px;
+  justify-self: center;
+}
+.resume-content .eyebrow {
+  font-size: 9px;
+  margin: 0 0 28px;
+  color: #c8c0ad;
+}
+.resume-content p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+.resume-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 45px;
+  padding-top: 20px;
+  border-top: 1px solid #ffffff1c;
+  font-size: 8px;
+  color: #aaa8af;
+}
+.resume-sheet {
+  position: relative;
+  display: block;
+  width: 86%;
+  margin: 12px auto 25px;
+  padding: 12px;
+  background: #d8d3c8;
+  color: #27262c;
+  transform: rotate(4deg);
+  box-shadow: 0 20px 60px #0004;
+  transition: transform 0.45s;
+}
+.resume-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #96918a;
+  transform: rotate(-7deg);
+  z-index: -1;
+}
+.resume-sheet:hover {
+  transform: rotate(0) translateY(-7px);
+}
+.resume-sheet img {
+  width: 100%;
+  display: block;
+  filter: grayscale(1);
+}
+.sheet-top,
+.sheet-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 3px 13px;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+.sheet-bottom {
+  padding: 13px 3px 2px;
+}
+.resume-document .resume-actions {
+  width: 100%;
+  gap: 14px;
+}
+.resume-document .big-link {
+  font-size: 16px;
+  padding: 13px 0;
+}
+.resume-document .big-link span {
+  font-size: 22px;
+}
+.resume-document .text-link {
+  font-size: 10px;
+}
+@media (max-width: 900px) {
+  .header nav a {
+    padding: 11px 12px;
+    font-size: 9px;
+  }
+  .hero-role {
+    font-size: 10px;
+  }
+  .resume-content {
+    gap: 7%;
+  }
+  .statement {
+    font-size: 34px;
+  }
+}
+@media (max-width: 600px) {
+  html {
+    scroll-padding-top: 100px;
+  }
+  .header {
+    top: 18px;
+    left: 6%;
+    width: 88%;
+  }
+  .header > .wordmark {
+    font-size: 23px;
+    padding: 9px 13px;
+  }
+  .navigation-shell {
+    pointer-events: auto;
+    position: relative;
+  }
+  .menu-toggle {
+    display: block;
+    border: 1px solid #ffffff20;
+    border-radius: 30px;
+    padding: 12px 18px;
+    color: #eeedf0;
+    background: #222127ee;
+    font-size: 11px;
+    backdrop-filter: blur(18px);
+  }
+  .header nav {
+    display: none;
+    position: absolute;
+    top: 56px;
+    right: 0;
+    width: 230px;
+    border-radius: 15px;
+    padding: 10px;
+    background: #222127f5;
+  }
+  .header nav.is-open {
+    display: flex;
+    flex-direction: column;
+  }
+  .header nav a,
+  .header nav a:nth-child(3),
+  .header nav a:nth-child(4) {
+    display: flex;
+    padding: 15px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  .nav-index {
+    display: inline;
+  }
+  .header nav a[aria-current]::before {
+    display: none;
+  }
+  .hero-name h1 {
+    font-size: 30px;
+  }
+  .hero-role {
+    font-size: 10px;
+  }
+  .statement {
+    font-size: 27px;
+  }
+  .about-bottom > div p {
+    font-size: 12px;
+  }
+  .section-heading h2,
+  .skills h2 {
+    font-size: 39px;
+  }
+  .contact-heading h2 {
+    font-size: 54px;
+  }
+  .contact-heading h2 > span {
+    font-size: 60px;
+  }
+  .resume-content {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .resume-content h2 {
+    font-size: 43px;
+  }
+  .resume-facts {
+    margin-top: 28px;
+  }
+  .resume-content > .resume-document {
+    max-width: 320px;
+  }
+  .resume-sheet {
+    width: 83%;
+  }
+  .education-line {
+    font-size: 7px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor {
+    display: none;
+  }
+  .resume-sheet {
+    transform: none;
+  }
+}
