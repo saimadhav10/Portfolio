@@ -1,4 +1,4 @@
-import ParticleKerala from "@/components/ParticleKerala";
+import ParticlePortrait from "@/components/ParticlePortrait";
 import Cursor from "@/components/Cursor";
 import Navigation from "@/components/Navigation";
 import Motion from "@/components/Motion";
@@ -16,7 +16,7 @@ export default function Home() {
       <Navigation />
       <main>
         <section className="hero" id="home" aria-labelledby="hero-name">
-          <ParticleKerala />
+          <ParticlePortrait />
           <div className="hero-copy hero-name">
             <p className="eyebrow">A WORK IN CURIOSITY</p>
             <h1 id="hero-name">Sai Madhav</h1>

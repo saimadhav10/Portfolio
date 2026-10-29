@@ -1,6 +1,6 @@
 # Sai Madhav — Portfolio
 
-A dark portfolio featuring an interactive dotted Kerala map, Pookalam.io and COCTracker, education, skills, a résumé, and a private contact form. Built with Next.js, React, TypeScript, SCSS, Three.js, Lenis, and GSAP. Visual direction inspired by [Daniel Ingrassia](https://ingrassiadaniel.it/); implementation is original.
+A dark portfolio featuring an interactive dotted portrait of Sai Madhav, Pookalam.io and COCTracker, education, skills, a résumé, and a private contact form. Built with Next.js, React, TypeScript, SCSS, Three.js, Lenis, and GSAP. Visual direction inspired by [Daniel Ingrassia](https://ingrassiadaniel.it/); implementation is original.
 
 ## Run locally
 
@@ -52,7 +52,7 @@ The server validates inputs, uses the visitor's email as Reply-To, rejects cross
 - Projects and skills: `src/lib/content.ts`. When adding projects, also update the count and introductory copy in `src/app/page.tsx`.
 - About and education: `src/app/page.tsx`.
 - Résumé: replace `public/Sai-Madhav-Resume.pdf` and update its thumbnail at `public/images/resume-preview.png`. The editable generator is `scripts/create_resume.py`, requiring Python and ReportLab.
-- Kerala map: `src/components/ParticleKerala.tsx` renders `public/kerala-points.json` with a brighter boundary and softer interior dots. Boundary data is from [geohacker/india](https://github.com/geohacker/india), which credits GADM. The upstream repository license is included at `public/kerala-map-source-license.txt`. `scripts/prepare_kerala.py` extracts and simplifies the mainland boundary from its state GeoJSON and generates both the particles and `src/lib/kerala-outline.ts` for the SVG fallback. Pointer movement gently tilts the map and displaces nearby points; reduced-motion mode disables these effects.
+- Portrait: `src/components/ParticlePortrait.tsx` samples the supplied `public/images/sai-madhav.jpg` into monochrome particles. A silhouette mask excludes the wall; adjust that path when replacing the photo. Pointer movement gently tilts the portrait and displaces nearby dots. Reduced-motion mode disables these effects, and the SVG fallback remains a dotted silhouette rather than displaying the solid photograph.
 - Typography: JetBrains Mono is self-hosted in `public/fonts`, with its SIL Open Font License included. Navigation collapses into an Explore menu on mobile. The glowing cursor and trail activate only for fine pointers with motion enabled; touch and reduced-motion users retain the native cursor.
 - COCTracker's screenshot comes from [its repository](https://github.com/saimadhav10/COCTracker); Supercell owns the game artwork. See that project's credits. Pookalam's preview is a CSS illustration.
 

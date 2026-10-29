@@ -7,25 +7,26 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
-.kerala {
+.portrait {
   position: absolute;
-  inset: 10% 16% 5%;
+  inset: 10% 16% 4%;
   pointer-events: none;
+  mask-image: linear-gradient(#000 77%, transparent 100%);
 }
-.kerala canvas {
+.portrait canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
-.kerala-fallback {
+.portrait-fallback {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  inset: 0;
   opacity: 0.3;
 }
-.kerala.ready .kerala-fallback {
+.portrait.ready .portrait-fallback {
   display: none;
 }
 .hero-coordinate {
@@ -301,8 +302,8 @@ em {
   }
 }
 @media (max-width: 600px) {
-  .kerala {
-    inset: 13% -4% 23%;
+  .portrait {
+    inset: 13% -12% 22%;
   }
   .hero-coordinate {
     top: 80px;
