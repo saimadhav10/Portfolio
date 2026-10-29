@@ -1,6 +1,6 @@
 # Sai Madhav — Portfolio
 
-A dark portfolio featuring an interactive particle globe, Pookalam.io and COCTracker, education, skills, a résumé, and a private contact form. Built with Next.js, React, TypeScript, SCSS, Three.js, Lenis, and GSAP. Visual direction inspired by [Daniel Ingrassia](https://ingrassiadaniel.it/); implementation is original.
+A dark portfolio featuring an interactive dotted Kerala map, Pookalam.io and COCTracker, education, skills, a résumé, and a private contact form. Built with Next.js, React, TypeScript, SCSS, Three.js, Lenis, and GSAP. Visual direction inspired by [Daniel Ingrassia](https://ingrassiadaniel.it/); implementation is original.
 
 ## Run locally
 
@@ -52,7 +52,7 @@ The server validates inputs, uses the visitor's email as Reply-To, rejects cross
 - Projects and skills: `src/lib/content.ts`. When adding projects, also update the count and introductory copy in `src/app/page.tsx`.
 - About and education: `src/app/page.tsx`.
 - Résumé: replace `public/Sai-Madhav-Resume.pdf` and update its thumbnail at `public/images/resume-preview.png`. The editable generator is `scripts/create_resume.py`, requiring Python and ReportLab.
-- Globe: `src/components/ParticleGlobe.tsx` renders a rotating particle Earth using `public/globe-points.json`. Land geometry comes from [Natural Earth's 110m land dataset](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson); `scripts/prepare_globe.py` generates the particles from that GeoJSON. Pointer movement tilts the globe and gently displaces nearby points. Reduced-motion mode disables these effects, and an SVG globe provides the fallback.
+- Kerala map: `src/components/ParticleKerala.tsx` renders `public/kerala-points.json` with a brighter boundary and softer interior dots. Boundary data is from [geohacker/india](https://github.com/geohacker/india), which credits GADM. The upstream repository license is included at `public/kerala-map-source-license.txt`. `scripts/prepare_kerala.py` extracts and simplifies the mainland boundary from its state GeoJSON and generates both the particles and `src/lib/kerala-outline.ts` for the SVG fallback. Pointer movement gently tilts the map and displaces nearby points; reduced-motion mode disables these effects.
 - Typography: JetBrains Mono is self-hosted in `public/fonts`, with its SIL Open Font License included. Navigation collapses into an Explore menu on mobile. The glowing cursor and trail activate only for fine pointers with motion enabled; touch and reduced-motion users retain the native cursor.
 - COCTracker's screenshot comes from [its repository](https://github.com/saimadhav10/COCTracker); Supercell owns the game artwork. See that project's credits. Pookalam's preview is a CSS illustration.
 

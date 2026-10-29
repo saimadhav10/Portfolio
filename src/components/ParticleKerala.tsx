@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { keralaOutline } from "@/lib/kerala-outline";
 
-export default function ParticleGlobe() {
+export default function ParticleKerala() {
   const host = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const element = host.current;
@@ -37,8 +38,7 @@ export default function ParticleGlobe() {
       vertexShader: `attribute float aLight; attribute float aSeed; varying float vLight;
         uniform float uTime; uniform float uPixel; uniform float uReveal; uniform float uHover; uniform vec2 uPointer;
         void main(){vec3 p=position; vec4 mv=modelViewMatrix*vec4(p,1.0);
-        vec3 normal=normalize(mat3(modelViewMatrix)*normalize(p));
-        float front=smoothstep(-.2,.65,normal.z);
+        float front=1.0;
         vec2 d=mv.xy-uPointer; float influence=exp(-dot(d,d)*5.0)*uHover*front;
         mv.xy+=normalize(d+vec2(.001))*influence*.12;
         mv.z+=sin(aSeed*40.0+uTime*2.0)*influence*.12;
@@ -48,10 +48,10 @@ export default function ParticleGlobe() {
         gl_PointSize=(.85+aLight*.7)*uPixel*(7.0/-mv.z);}`,
       fragmentShader: `varying float vLight; void main(){float d=length(gl_PointCoord-.5);if(d>.5)discard;gl_FragColor=vec4(vec3(.89,.91,.96),vLight*(1.0-smoothstep(.12,.5,d)));}`,
     });
-    const globe = new THREE.Points(geometry, material);
-    globe.rotation.y = -0.65;
-    globe.rotation.z = -0.12;
-    scene.add(globe);
+    const kerala = new THREE.Points(geometry, material);
+    kerala.rotation.y = 0;
+
+    scene.add(kerala);
     let disposed = false,
       frame = 0,
       visible = true,
@@ -61,9 +61,9 @@ export default function ParticleGlobe() {
       py = 0;
     const pointer = new THREE.Vector2(10, 10);
     const controller = new AbortController();
-    fetch("/globe-points.json", { signal: controller.signal })
+    fetch("/kerala-points.json", { signal: controller.signal })
       .then((r) => {
-        if (!r.ok) throw new Error("Globe unavailable");
+        if (!r.ok) throw new Error("Kerala map unavailable");
         return r.json();
       })
       .then((data: number[]) => {
@@ -72,7 +72,7 @@ export default function ParticleGlobe() {
           lights: number[] = [],
           seeds: number[] = [];
         for (let i = 0; i < data.length; i += 4) {
-          positions.push(data[i] * 1.7, data[i + 1] * 1.7, data[i + 2] * 1.7);
+          positions.push(data[i], data[i + 1], data[i + 2]);
           lights.push(data[i + 3]);
           seeds.push(Math.random());
         }
@@ -93,7 +93,7 @@ export default function ParticleGlobe() {
         element.classList.add("ready");
       })
       .catch(() => {
-        /* The SVG globe remains visible if loading fails. */
+        /* The SVG kerala remains visible if loading fails. */
       });
     const resize = () => {
       const r = element.getBoundingClientRect();
@@ -131,14 +131,14 @@ export default function ParticleGlobe() {
     document.addEventListener("pointerleave", leave);
     const start = performance.now();
     let previous = start,
-      rotation = -0.65;
+      rotation = 0;
     const render = () => {
       if (disposed) return;
       const now = performance.now(),
         delta = Math.min((now - previous) / 1000, 0.05);
       previous = now;
       if (visible && !document.hidden) {
-        if (!reduced) rotation += delta * 0.055;
+        rotation = reduced ? 0 : Math.sin((now - start) / 5000) * 0.035;
         material.uniforms.uTime.value = reduced ? 0 : (now - start) / 1000;
         material.uniforms.uReveal.value = reduced
           ? 1
@@ -148,11 +148,11 @@ export default function ParticleGlobe() {
         material.uniforms.uPointer.value.lerp(pointer, 0.1);
         material.uniforms.uHover.value +=
           ((reduced ? 0 : hover) - material.uniforms.uHover.value) * 0.08;
-        globe.rotation.y +=
-          (rotation + (reduced ? 0 : px * 0.3 * hover) - globe.rotation.y) *
+        kerala.rotation.y +=
+          (rotation + (reduced ? 0 : px * 0.18 * hover) - kerala.rotation.y) *
           0.035;
-        globe.rotation.x +=
-          ((reduced ? 0 : py * 0.12 * hover) - globe.rotation.x) * 0.035;
+        kerala.rotation.x +=
+          ((reduced ? 0 : py * 0.12 * hover) - kerala.rotation.x) * 0.035;
         renderer.render(scene, camera);
       }
       frame = requestAnimationFrame(render);
@@ -173,21 +173,26 @@ export default function ParticleGlobe() {
     };
   }, []);
   return (
-    <div ref={host} className="globe" aria-hidden="true">
+    <div ref={host} className="kerala" aria-hidden="true">
       <svg
-        className="globe-fallback"
-        viewBox="0 0 400 400"
+        className="kerala-fallback"
+        viewBox="0 0 400 600"
         fill="none"
         stroke="currentColor"
         strokeWidth="1"
         strokeDasharray="1 5"
       >
-        <circle cx="200" cy="200" r="170" />
-        <ellipse cx="200" cy="200" rx="90" ry="170" />
-        <ellipse cx="200" cy="200" rx="150" ry="170" />
-        <ellipse cx="200" cy="200" rx="170" ry="70" />
-        <ellipse cx="200" cy="200" rx="170" ry="130" />
-        <path d="M30 200h340M200 30v340" />
+        <defs>
+          <pattern
+            id="kerala-dot-pattern"
+            width="5"
+            height="5"
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="2" cy="2" r=".7" fill="currentColor" stroke="none" />
+          </pattern>
+        </defs>
+        <path d={keralaOutline} fill="url(#kerala-dot-pattern)" />
       </svg>
     </div>
   );
