@@ -59,11 +59,6 @@ export default function Home() {
             </span>
           </h2>
           <div className="about-bottom" data-reveal>
-            <p className="small-note">
-              A CURIOUS MIND.
-              <br />
-              AN OPEN NOTEBOOK.
-            </p>
             <div>
               <p>
                 I’m Sai, a B.Tech Computer Science student specializing in Data
@@ -78,11 +73,6 @@ export default function Home() {
                 A few things I’ve made <span>↘</span>
               </a>
             </div>
-          </div>
-          <div className="education-line">
-            <span>MAR ATHANASIUS COLLEGE OF ENGINEERING</span>
-            <span>B.TECH · CS & DATA SCIENCE</span>
-            <span>CLASS OF 2029</span>
           </div>
         </section>
         <section
@@ -101,13 +91,17 @@ export default function Home() {
               <em>curiosity.</em>
             </h2>
             <p>
-              Two projects. Different worlds.
+              Different projects. Different worlds.
               <br />
               The same urge to figure things out.
             </p>
           </div>
           {projects.map((project) => (
-            <article className="project" key={project.id}>
+            <article
+              className="project"
+              id={`project-${project.type}`}
+              key={project.id}
+            >
               <a
                 className={`project-visual ${project.type}`}
                 href={project.link}
@@ -136,7 +130,7 @@ export default function Home() {
                     </span>
                     <p>A LITTLE TRADITION. A LITTLE COMPETITION.</p>
                   </div>
-                ) : (
+                ) : project.type === "coc" ? (
                   <div className="coc-scene">
                     <div className="coc-caption">
                       <span>
@@ -160,15 +154,36 @@ export default function Home() {
                       />
                     </div>
                   </div>
+                ) : (
+                  <div className="reviews-scene">
+                    <div className="reviews-caption">
+                      <span>PC · CONSOLE · MOBILE</span>
+                      <strong>
+                        Your games.
+                        <br />
+                        <em>Your verdict.</em>
+                      </strong>
+                      <p>RATE / REVIEW / DISCUSS</p>
+                    </div>
+                    <div
+                      className="review-score"
+                      aria-label="Rate games on a scale of zero to ten"
+                    >
+                      <span>THE SCORE IS YOURS</span>
+                      <strong>0–10</strong>
+                      <span>EVERY PERSPECTIVE COUNTS</span>
+                    </div>
+                  </div>
                 )}
                 <div className="visual-bottom">
-                  <span>{project.id} / 02</span>
+                  <span>
+                    {project.id} / {String(projects.length).padStart(2, "0")}
+                  </span>
                   <span className="circle-arrow">↗</span>
                 </div>
               </a>
               <div className="project-details" data-reveal>
                 <div>
-                  <p className="eyebrow">{project.category}</p>
                   <h3>{project.title}</h3>
                   <div className="tags">
                     {project.tags.map((tag) => (
@@ -211,7 +226,6 @@ export default function Home() {
         >
           <div className="section-label">
             <span>03 / MY TOOLKIT</span>
-            <span>ALWAYS A STUDENT</span>
           </div>
           <div className="skills-layout">
             <h2 id="skills-title" data-reveal>
@@ -254,11 +268,6 @@ export default function Home() {
                 <br />
                 One page. Room to grow.
               </p>
-              <div className="resume-facts">
-                <span>01 PAGE</span>
-                <span>02 PROJECTS</span>
-                <span>CLASS OF ’29</span>
-              </div>
             </div>
             <div className="resume-document">
               <a

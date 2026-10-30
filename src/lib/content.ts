@@ -2,7 +2,6 @@ export const projects = [
   {
     id: "01",
     title: "Pookalam.io",
-    category: "REAL-TIME MULTIPLAYER / WEB",
     year: "WEB EXPERIENCE",
     repo: "https://github.com/saimadhav10/pookalam-io",
     link: "https://pookalam-io.onrender.com/",
@@ -15,7 +14,6 @@ export const projects = [
   {
     id: "02",
     title: "COCTracker",
-    category: "OFFLINE-FIRST / ANDROID",
     year: "MOBILE APPLICATION",
     repo: "https://github.com/saimadhav10/COCTracker",
     link: "https://github.com/saimadhav10/COCTracker/releases/latest",
@@ -24,6 +22,18 @@ export const projects = [
     tags: ["Flutter", "Dart", "Local storage"],
     description:
       "Your villages. Your upgrades. One quiet dashboard. COCTracker is an offline-first Clash of Clans companion that turns game exports into clear progress views, persistent upgrade countdowns, and planning recommendations. Multiple village profiles, local storage, and backup tools keep the experience practical, focused, and entirely under the player’s control.",
+  },
+  {
+    id: "03",
+    title: "GameReviews",
+    year: "COMMUNITY PLATFORM",
+    repo: "https://github.com/saimadhav10/game-reviews",
+    link: "https://gamereviews.gamereviews-saimadhav10.workers.dev",
+    action: "Explore GameReviews",
+    type: "reviews",
+    tags: ["React", "TypeScript", "Hono", "Cloudflare D1", "Firebase"],
+    description:
+      "Your games. Your verdict. GameReviews brings PC, console, and mobile players together to rate games, write reviews, and join threaded discussions. Community scores shape the Top 50, while votes surface daily highlights. Built with moderated submissions, spoiler controls, public anonymity options, and a searchable catalog that players can help expand.",
   },
 ] as const;
 export const skills = [

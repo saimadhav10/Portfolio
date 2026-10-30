@@ -49,7 +49,7 @@ The server validates inputs, uses the visitor's email as Reply-To, rejects cross
 
 ## Update content
 
-- Projects and skills: `src/lib/content.ts`. When adding projects, also update the count and introductory copy in `src/app/page.tsx`.
+- Projects and skills: `src/lib/content.ts`. Project counters derive from this list automatically; add a matching preview in `src/app/page.tsx` for a new visual type. Each project has a shareable `#project-<type>` anchor.
 - About and education: `src/app/page.tsx`.
 - Résumé: replace `public/Sai-Madhav-Resume.pdf` and update its thumbnail at `public/images/resume-preview.png`. The editable generator is `scripts/create_resume.py`, requiring Python and ReportLab.
 - Portrait: `src/components/ParticlePortrait.tsx` samples the supplied `public/images/sai-madhav.jpg` into monochrome particles. A silhouette mask excludes the wall; adjust that path when replacing the photo. Pointer movement gently tilts the portrait and displaces nearby dots. Reduced-motion mode disables these effects, and the SVG fallback remains a dotted silhouette rather than displaying the solid photograph.

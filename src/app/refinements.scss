@@ -1,4 +1,110 @@
 // Interaction and typography refinements.
+.about-bottom {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: end;
+  margin-top: 50px;
+}
+.reviews {
+  background: #151515;
+  color: #f7f7f5;
+  border-top: 5px solid #ffe600;
+}
+.reviews-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7%;
+  padding: 65px 6%;
+  background-image:
+    linear-gradient(#ffffff04 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff04 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.reviews-caption {
+  max-width: 60%;
+}
+.reviews-caption > span,
+.reviews-caption p {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: #b6b9b0;
+}
+.reviews-caption strong {
+  display: block;
+  font-size: clamp(26px, 3.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.06em;
+  margin: 24px 0;
+}
+.reviews-caption em {
+  color: #ffe600;
+  font-style: normal;
+}
+.review-score {
+  width: 230px;
+  min-width: 170px;
+  transform: rotate(-5deg);
+  background: #ffe600;
+  color: #151515;
+  border: 1px solid #fff;
+  box-shadow: 10px 10px 0 #000;
+  transition: transform 0.4s;
+}
+.review-score > span {
+  display: block;
+  padding: 15px 12px;
+  font-size: 8px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.review-score strong {
+  display: block;
+  padding: 20px 12px;
+  border-block: 1px solid #151515;
+  text-align: center;
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 72px);
+  letter-spacing: -0.08em;
+}
+.reviews:hover .review-score {
+  transform: rotate(0);
+}
+@media (max-width: 600px) {
+  .reviews-scene {
+    flex-direction: column;
+    gap: 16px;
+    padding: 55px 20px 60px;
+  }
+  .reviews-caption {
+    max-width: 100%;
+    text-align: center;
+  }
+  .reviews-caption strong {
+    font-size: 27px;
+    margin: 12px 0;
+  }
+  .reviews-caption > span {
+    font-size: 7px;
+  }
+  .reviews-caption p {
+    display: none;
+  }
+  .review-score {
+    width: 145px;
+    min-width: 0;
+  }
+  .review-score > span {
+    font-size: 6px;
+    padding: 8px;
+  }
+  .review-score strong {
+    font-size: 40px;
+    padding: 9px;
+  }
+}
 html,
 body {
   scrollbar-width: none;
