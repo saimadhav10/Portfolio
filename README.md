@@ -26,27 +26,6 @@ Next.js · React · TypeScript · SCSS · Three.js · GSAP · Lenis
 
 Hosted on Vercel. Contact messages are delivered through Resend.
 
-## Run locally
-
-Requires Node.js 22+ and npm.
-
-```sh
-npm ci
-npm run dev
-```
-
-Open [localhost:3000](http://localhost:3000).
-
-For contact-form delivery, copy `.env.example` to `.env.local` and configure:
-
-| Variable             | Purpose                          |
-| -------------------- | -------------------------------- |
-| `RESEND_API_KEY`     | Resend sending API key           |
-| `CONTACT_TO_EMAIL`   | Private receiving inbox          |
-| `CONTACT_FROM_EMAIL` | Resend-authorized sender address |
-
-Keep credentials in ignored environment files locally and Vercel environment settings in production. The portfolio runs without them; email delivery requires configuration.
-
 ## Maintain
 
 - **Projects and skills:** `src/lib/content.ts`. Project artwork lives in `src/app/page.tsx`.
