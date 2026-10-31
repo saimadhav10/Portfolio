@@ -1,63 +1,61 @@
-# Sai Madhav — Portfolio
+<div align="center">
 
-A dark portfolio featuring an interactive dotted portrait of Sai Madhav, Pookalam.io and COCTracker, education, skills, a résumé, and a private contact form. Built with Next.js, React, TypeScript, SCSS, Three.js, Lenis, and GSAP. Visual direction inspired by [Daniel Ingrassia](https://ingrassiadaniel.it/); implementation is original.
+# Sai Madhav
+
+Computer Science student. Fascinated by data and numbers.
+
+[Visit portfolio](https://saimadhav1.runs-on.dev) · [LinkedIn](https://www.linkedin.com/in/saimadhav1) · [GitHub](https://github.com/saimadhav10)
+
+</div>
+
+---
+
+A personal portfolio with an interactive particle portrait, selected projects, technical skills, a downloadable résumé, and a private contact form. Built with JetBrains Mono, subtle motion, and responsive layouts.
+
+## Selected projects
+
+| Project                                                    | What it does                                                               |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------- |
+| [Pookalam.io](https://github.com/saimadhav10/pookalam-io)  | Real-time multiplayer drawing game inspired by Onam.                       |
+| [COCTracker](https://github.com/saimadhav10/COCTracker)    | Offline-first Android companion for village progress and upgrade planning. |
+| [GameReviews](https://github.com/saimadhav10/game-reviews) | Community game ratings, reviews, and discussions.                          |
+
+## Stack
+
+Next.js · React · TypeScript · SCSS · Three.js · GSAP · Lenis
+
+Hosted on Vercel. Contact messages are delivered through Resend.
 
 ## Run locally
 
-Use Node.js 22 LTS or newer and npm.
+Requires Node.js 22+ and npm.
 
 ```sh
 npm ci
-cp .env.example .env.local
 npm run dev
 ```
 
-Open http://localhost:3000. The page and résumé work without email credentials. The form returns an explicit setup message until configured.
+Open [localhost:3000](http://localhost:3000).
 
-```sh
-npm test
-npm run typecheck
-npm run build
-```
+For contact-form delivery, copy `.env.example` to `.env.local` and configure:
 
-## Deploy free on Vercel
+| Variable             | Purpose                          |
+| -------------------- | -------------------------------- |
+| `RESEND_API_KEY`     | Resend sending API key           |
+| `CONTACT_TO_EMAIL`   | Private receiving inbox          |
+| `CONTACT_FROM_EMAIL` | Resend-authorized sender address |
 
-1. Sign in to [Vercel](https://vercel.com/new) with GitHub and import `saimadhav10/Portfolio`.
-2. Select Next.js and leave the root directory at the repository root. Default build and output settings are sufficient.
-3. Add the three server-side environment variables below in Project Settings → Environment Variables. Never use a `NEXT_PUBLIC_` prefix for secrets.
-4. Deploy. Future pushes to `main` deploy automatically once the Git integration is connected.
-5. In Project Settings → Domains, add `saimadhav1.runs-on.dev`. At the provider managing that subdomain, enter the **exact DNS records shown by Vercel**. Resolve conflicting records for the same hostname as instructed by the provider. Wait for domain verification and HTTPS. Do not change the parent `runs-on.dev` zone.
-6. Open the custom domain, check both projects and the résumé, then submit a real contact message to confirm delivery.
+Keep credentials in ignored environment files locally and Vercel environment settings in production. The portfolio runs without them; email delivery requires configuration.
 
-Vercel's Hobby plan is intended for personal, non-commercial projects and has usage limits. See [Hobby documentation](https://vercel.com/docs/plans/hobby).
+## Maintain
 
-## Private email delivery with Resend
+- **Projects and skills:** `src/lib/content.ts`. Project artwork lives in `src/app/page.tsx`.
+- **About and layout:** `src/app/page.tsx`.
+- **Portrait:** `public/images/sai-madhav.jpg` and `src/components/ParticlePortrait.tsx`.
+- **Résumé:** `public/Sai-Madhav-Resume.pdf` and `public/images/resume-preview.png`.
 
-Create a [Resend](https://resend.com/) account and verify a sending domain you control, following its DNS instructions. If your subdomain provider does not support the required records, use another verified sending domain or another email provider before enabling the form.
+Before publishing changes, run `npm test`, `npm run typecheck`, and `npm run build`. Import this repository into Vercel with the Next.js preset; connected deployments follow pushes to `main`.
 
-Set these values directly in Vercel's environment settings, then redeploy:
+---
 
-| Variable             | Value                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------- |
-| `RESEND_API_KEY`     | A Resend API key restricted to sending email, ideally scoped to your verified domain  |
-| `CONTACT_TO_EMAIL`   | Your private inbox that receives enquiries                                            |
-| `CONTACT_FROM_EMAIL` | A sender on your verified domain, e.g. `Sai Portfolio <contact@your-verified-domain>` |
-
-For local testing, put the same variables in `.env.local` and restart the dev server. `.env*` is ignored except the blank `.env.example`. Keep keys out of chat, source files, and Git. Revoke and replace any exposed key.
-
-The server validates inputs, uses the visitor's email as Reply-To, rejects cross-origin browser requests, includes a honeypot, and reports errors without pretending delivery succeeded. This application does not store messages; Resend processes the submitted name, email, and message. Configure a Vercel firewall rate-limit rule for POST `/api/contact` before a public launch to protect the email quota. The honeypot is basic filtering, not a distributed rate limiter.
-
-## Update content
-
-- Projects and skills: `src/lib/content.ts`. Project counters derive from this list automatically; add a matching preview in `src/app/page.tsx` for a new visual type. Each project has a shareable `#project-<type>` anchor.
-- About and education: `src/app/page.tsx`.
-- Résumé: replace `public/Sai-Madhav-Resume.pdf` and update its thumbnail at `public/images/resume-preview.png`. The editable generator is `scripts/create_resume.py`, requiring Python and ReportLab.
-- Portrait: `src/components/ParticlePortrait.tsx` samples the supplied `public/images/sai-madhav.jpg` into monochrome particles. A silhouette mask excludes the wall; adjust that path when replacing the photo. Pointer movement gently tilts the portrait and displaces nearby dots. Reduced-motion mode disables these effects, and the SVG fallback remains a dotted silhouette rather than displaying the solid photograph.
-- Typography: JetBrains Mono is self-hosted in `public/fonts`, with its SIL Open Font License included. Navigation collapses into an Explore menu on mobile. The glowing cursor and trail activate only for fine pointers with motion enabled; touch and reduced-motion users retain the native cursor.
-- COCTracker's screenshot comes from [its repository](https://github.com/saimadhav10/COCTracker); Supercell owns the game artwork. See that project's credits. Pookalam's preview is a CSS illustration.
-
-No analytics or tracking cookies are included. Motion respects reduced-motion preferences. A static portrait fallback is available when WebGL cannot initialize.
-
-## Verification
-
-Production build, TypeScript checks, and contact validation tests are provided above. Live email delivery requires your own credentials and a real deployment; mocked provider tests never send email.
+Visual inspiration: [Daniel Ingrassia](https://ingrassiadaniel.it/). JetBrains Mono includes its license in `public/fonts`. COCTracker artwork credits are available in [its repository](https://github.com/saimadhav10/COCTracker).
