@@ -19,16 +19,18 @@ export default function Home() {
           <div className="intro-sequence" data-chapter-surface>
             <ParticlePortrait />
             <section className="hero" id="home" aria-labelledby="hero-name">
-              <div className="hero-copy hero-name">
-                <p className="eyebrow">A WORK IN CURIOSITY</p>
-                <h1 id="hero-name">Sai Madhav</h1>
-              </div>
-              <div className="hero-copy hero-role">
-                <p>
-                  Computer Science student.
-                  <br />
-                  <span>Fascinated by data & numbers.</span>
-                </p>
+              <div className="hero-introduction">
+                <div className="hero-copy hero-name">
+                  <p className="eyebrow">A WORK IN CURIOSITY</p>
+                  <h1 id="hero-name">Sai Madhav</h1>
+                </div>
+                <div className="hero-copy hero-role">
+                  <p>
+                    Computer Science student.
+                    <br />
+                    <span>Fascinated by data & numbers.</span>
+                  </p>
+                </div>
               </div>
               <div className="hero-bottom">
                 <p>LEARNING. EXPLORING. BUILDING.</p>
@@ -102,169 +104,176 @@ export default function Home() {
                 The same urge to figure things out.
               </p>
             </div>
-            {projects.map((project) => (
-              <article
-                className="project"
-                id={`project-${project.type}`}
-                key={project.id}
-              >
-                <a
-                  className={`project-visual ${project.type}`}
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${project.action}: ${project.title}`}
-                >
-                  <div className="visual-top">
-                    <span>{project.year}</span>
-                    <span>EXPLORE PROJECT ↗</span>
-                  </div>
-                  {project.type === "pookalam" ? (
-                    <div className="flower-scene">
-                      <div className="flower" aria-hidden="true">
-                        {Array.from({ length: 12 }, (_, i) => (
-                          <i
-                            key={i}
-                            style={{ "--i": i } as React.CSSProperties}
-                          />
-                        ))}
-                        <b />
-                        <b />
+            <p className="gallery-hint" aria-hidden="true">
+              SCROLL TO EXPLORE THE PROJECTS <span>→</span>
+            </p>
+            <div className="project-gallery">
+              <div className="project-track">
+                {projects.map((project) => (
+                  <article
+                    className="project"
+                    id={`project-${project.type}`}
+                    key={project.id}
+                  >
+                    <a
+                      className={`project-visual ${project.type}`}
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.action}: ${project.title}`}
+                    >
+                      <div className="visual-top">
+                        <span>{project.year}</span>
+                        <span>EXPLORE PROJECT ↗</span>
                       </div>
-                      <span className="flower-title">
-                        pookalam<span>.io</span>
-                      </span>
-                      <p>A LITTLE TRADITION. A LITTLE COMPETITION.</p>
-                    </div>
-                  ) : project.type === "coc" ? (
-                    <div className="coc-scene">
-                      <div className="coc-caption">
+                      {project.type === "pookalam" ? (
+                        <div className="flower-scene">
+                          <div className="flower" aria-hidden="true">
+                            {Array.from({ length: 12 }, (_, i) => (
+                              <i
+                                key={i}
+                                style={{ "--i": i } as React.CSSProperties}
+                              />
+                            ))}
+                            <b />
+                            <b />
+                          </div>
+                          <span className="flower-title">
+                            pookalam<span>.io</span>
+                          </span>
+                          <p>A LITTLE TRADITION. A LITTLE COMPETITION.</p>
+                        </div>
+                      ) : project.type === "coc" ? (
+                        <div className="coc-scene">
+                          <div className="coc-caption">
+                            <span>
+                              YOUR VILLAGES.
+                              <br />
+                              YOUR UPGRADES.
+                            </span>
+                            <strong>
+                              One quiet
+                              <br />
+                              dashboard.
+                            </strong>
+                            <small>COCTracker / ANDROID</small>
+                          </div>
+                          <div className="phone">
+                            <div className="phone-speaker" />
+                            <img
+                              src="/images/coc-dashboard.png"
+                              alt="COCTracker village dashboard showing progress and upgrades"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                      ) : project.type === "traffic" ? (
+                        <div className="traffic-scene">
+                          <div className="traffic-caption">
+                            <span>LIVE TRAFFIC / ROUTE PLANNING</span>
+                            <strong>
+                              A clearer way
+                              <br />
+                              through <em>Kochi.</em>
+                            </strong>
+                            <p>CAR / TWO-WHEELER / NOW OR LATER</p>
+                          </div>
+                          <svg
+                            className="traffic-map"
+                            viewBox="0 0 460 460"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M30 0C170 90 10 180 120 260S100 390 210 460H0V0Z"
+                              fill="#acc9c5"
+                            />
+                            <g stroke="#a5b8a6" strokeWidth="2">
+                              <path d="M80 50L430 350M20 140L370 440M160 0L460 260M250 0L460 180M70 320L230 460" />
+                              <path d="M90 460L460 90M40 370L410 0M0 280L280 0M180 460L460 180M270 460L460 270" />
+                            </g>
+                            <path
+                              d="M130 350L205 275L205 210L300 115L375 115"
+                              stroke="#f5f1df"
+                              strokeWidth="18"
+                              strokeLinejoin="round"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M130 350L205 275L205 210L300 115L375 115"
+                              stroke="#245e4d"
+                              strokeWidth="7"
+                              strokeLinejoin="round"
+                              strokeLinecap="round"
+                            />
+                            <path d="M205 275V210L245 170" stroke="#c28b3d" strokeWidth="7" />
+                            <circle cx="130" cy="350" r="12" fill="#f5f1df" stroke="#245e4d" strokeWidth="5" />
+                            <circle cx="375" cy="115" r="12" fill="#245e4d" stroke="#f5f1df" strokeWidth="5" />
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className="reviews-scene">
+                          <div className="reviews-caption">
+                            <span>PC · CONSOLE · MOBILE</span>
+                            <strong>
+                              Your games.
+                              <br />
+                              <em>Your verdict.</em>
+                            </strong>
+                            <p>RATE / REVIEW / DISCUSS</p>
+                          </div>
+                          <div
+                            className="review-score"
+                            aria-label="Rate games on a scale of zero to ten"
+                          >
+                            <span>THE SCORE IS YOURS</span>
+                            <strong>0–10</strong>
+                            <span>EVERY PERSPECTIVE COUNTS</span>
+                          </div>
+                        </div>
+                      )}
+                      <div className="visual-bottom">
                         <span>
-                          YOUR VILLAGES.
-                          <br />
-                          YOUR UPGRADES.
+                          {project.id} / {String(projects.length).padStart(2, "0")}
                         </span>
-                        <strong>
-                          One quiet
-                          <br />
-                          dashboard.
-                        </strong>
-                        <small>COCTracker / ANDROID</small>
+                        <span className="circle-arrow">↗</span>
                       </div>
-                      <div className="phone">
-                        <div className="phone-speaker" />
-                        <img
-                          src="/images/coc-dashboard.png"
-                          alt="COCTracker village dashboard showing progress and upgrades"
-                          loading="lazy"
-                        />
+                    </a>
+                    <div className="project-details" data-reveal>
+                      <div>
+                        <h3>{project.title}</h3>
+                        <div className="tags">
+                          {project.tags.map((tag) => (
+                            <span key={tag}>{tag}</span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ) : project.type === "traffic" ? (
-                    <div className="traffic-scene">
-                      <div className="traffic-caption">
-                        <span>LIVE TRAFFIC / ROUTE PLANNING</span>
-                        <strong>
-                          A clearer way
-                          <br />
-                          through <em>Kochi.</em>
-                        </strong>
-                        <p>CAR / TWO-WHEELER / NOW OR LATER</p>
-                      </div>
-                      <svg
-                        className="traffic-map"
-                        viewBox="0 0 460 460"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M30 0C170 90 10 180 120 260S100 390 210 460H0V0Z"
-                          fill="#acc9c5"
-                        />
-                        <g stroke="#a5b8a6" strokeWidth="2">
-                          <path d="M80 50L430 350M20 140L370 440M160 0L460 260M250 0L460 180M70 320L230 460" />
-                          <path d="M90 460L460 90M40 370L410 0M0 280L280 0M180 460L460 180M270 460L460 270" />
-                        </g>
-                        <path
-                          d="M130 350L205 275L205 210L300 115L375 115"
-                          stroke="#f5f1df"
-                          strokeWidth="18"
-                          strokeLinejoin="round"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M130 350L205 275L205 210L300 115L375 115"
-                          stroke="#245e4d"
-                          strokeWidth="7"
-                          strokeLinejoin="round"
-                          strokeLinecap="round"
-                        />
-                        <path d="M205 275V210L245 170" stroke="#c28b3d" strokeWidth="7" />
-                        <circle cx="130" cy="350" r="12" fill="#f5f1df" stroke="#245e4d" strokeWidth="5" />
-                        <circle cx="375" cy="115" r="12" fill="#245e4d" stroke="#f5f1df" strokeWidth="5" />
-                      </svg>
-                    </div>
-                  ) : (
-                    <div className="reviews-scene">
-                      <div className="reviews-caption">
-                        <span>PC · CONSOLE · MOBILE</span>
-                        <strong>
-                          Your games.
-                          <br />
-                          <em>Your verdict.</em>
-                        </strong>
-                        <p>RATE / REVIEW / DISCUSS</p>
-                      </div>
-                      <div
-                        className="review-score"
-                        aria-label="Rate games on a scale of zero to ten"
-                      >
-                        <span>THE SCORE IS YOURS</span>
-                        <strong>0–10</strong>
-                        <span>EVERY PERSPECTIVE COUNTS</span>
+                      <div>
+                        <p>{project.description}</p>
+                        <div className="project-links">
+                          <a
+                            className="text-link"
+                            href={project.link}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {project.action} ↗
+                          </a>
+                          <a
+                            className="text-link muted"
+                            href={project.repo}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            View source ↗
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  )}
-                  <div className="visual-bottom">
-                    <span>
-                      {project.id} / {String(projects.length).padStart(2, "0")}
-                    </span>
-                    <span className="circle-arrow">↗</span>
-                  </div>
-                </a>
-                <div className="project-details" data-reveal>
-                  <div>
-                    <h3>{project.title}</h3>
-                    <div className="tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <p>{project.description}</p>
-                    <div className="project-links">
-                      <a
-                        className="text-link"
-                        href={project.link}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {project.action} ↗
-                      </a>
-                      <a
-                        className="text-link muted"
-                        href={project.repo}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        View source ↗
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
+                  </article>
+                ))}
+              </div>
+            </div>
             <p className="more-work">
               STILL LEARNING. STILL BUILDING. MORE TO COME. <span>↗</span>
             </p>

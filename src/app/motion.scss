@@ -8,6 +8,110 @@ main {
 .chapter {
   position: relative;
 }
+.header {
+  left: 5.2%;
+  width: 89.6%;
+}
+.intro-sequence .hero {
+  min-height: 650px;
+  max-height: none;
+}
+.hero-introduction {
+  position: absolute;
+  top: 47%;
+  left: 5.2%;
+  width: 40%;
+  transform: translateY(-50%);
+}
+.hero-introduction .hero-copy {
+  position: static;
+  text-align: left;
+}
+.hero-introduction .hero-name h1 {
+  font-size: clamp(36px, 5vw, 72px);
+}
+.hero-introduction .hero-role {
+  margin-top: 28px;
+  max-width: 370px;
+  font-size: 13px;
+}
+.hero-introduction .hero-role p {
+  margin-bottom: 0;
+}
+.hero-coordinate {
+  top: 130px;
+  left: 5.2%;
+  transform: none;
+}
+.intro-sequence .portrait-fallback {
+  width: 50%;
+  height: 78%;
+  top: 10%;
+  left: 46%;
+}
+.gallery-hint {
+  display: none;
+}
+@media (min-width: 1000px) and (min-height: 760px) {
+  html[data-gallery="horizontal"] .gallery-hint {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  html[data-gallery="horizontal"] .project-gallery {
+    overflow: clip;
+  }
+  html[data-gallery="horizontal"] .project-track {
+    display: flex;
+    gap: 5.2vw;
+  }
+  html[data-gallery="horizontal"] .project {
+    flex: 0 0 100%;
+    min-width: 0;
+    margin-bottom: 45px;
+  }
+  html[data-gallery="horizontal"] .project-visual {
+    height: 46svh;
+    min-height: 300px;
+    aspect-ratio: auto;
+  }
+  html[data-gallery="horizontal"] .project-details {
+    gap: 6%;
+  }
+}
+@media (max-width: 700px) {
+  .header {
+    left: 6%;
+    width: 88%;
+  }
+  .hero-introduction {
+    top: 125px;
+    left: 6%;
+    width: 88%;
+    transform: none;
+  }
+  .hero-introduction .hero-name h1 {
+    font-size: 38px;
+  }
+  .hero-introduction .hero-role {
+    margin-top: 18px;
+    font-size: 11px;
+  }
+  .hero-coordinate {
+    top: 94px;
+    left: 6%;
+    font-size: 6px;
+  }
+  .intro-sequence .portrait-fallback {
+    top: 300px;
+    left: 5%;
+    width: 90%;
+    height: calc(100% - 395px);
+  }
+}
 [data-chapter-surface] {
   position: relative;
   background-color: var(--bg);

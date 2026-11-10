@@ -9,11 +9,13 @@ export default function Motion() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
+    let hasRestoredHash = false;
 
     media.add(
       {
         motion: "(prefers-reduced-motion: no-preference)",
         desktop: "(min-width: 901px)",
+        gallery: "(min-width: 1000px) and (min-height: 760px)",
       },
       (context) => {
         if (!context.conditions?.motion) return;
@@ -23,6 +25,11 @@ export default function Motion() {
         const lenis = new Lenis({ duration: 0.95, anchors: false });
         const tick = (time: number) => lenis.raf(time * 1000);
         let disposed = false;
+        let horizontal: {
+          gallery: HTMLElement;
+          track: HTMLElement;
+          trigger: ScrollTrigger;
+        } | undefined;
 
         root.dataset.motion = "ready";
         lenis.on("scroll", ScrollTrigger.update);
@@ -52,6 +59,29 @@ export default function Motion() {
               },
             });
           });
+        }
+
+        const gallery = document.querySelector<HTMLElement>(".project-gallery");
+        const track = gallery?.querySelector<HTMLElement>(".project-track");
+        if (context.conditions.gallery && gallery && track) {
+          root.dataset.gallery = "horizontal";
+          const distance = () => track.scrollWidth - gallery.clientWidth;
+          const animation = gsap.to(track, {
+            x: () => -distance(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: gallery,
+              start: "top 110px",
+              end: () => `+=${distance()}`,
+              pin: gallery,
+              pinSpacing: true,
+              scrub: 0.45,
+              invalidateOnRefresh: true,
+              anticipatePin: 1,
+            },
+          });
+          if (animation.scrollTrigger)
+            horizontal = { gallery, track, trigger: animation.scrollTrigger };
         }
 
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
@@ -201,6 +231,12 @@ export default function Motion() {
 
         // Anchor positions come from normal layout, even during a pinned transition.
         const destination = (target: HTMLElement) => {
+          const project = target.closest<HTMLElement>(".project");
+          if (horizontal && project && horizontal.gallery.contains(project)) {
+            const offset = project.getBoundingClientRect().left -
+              horizontal.track.getBoundingClientRect().left;
+            return horizontal.trigger.start + offset;
+          }
           const chapter = target.closest<HTMLElement>("[data-chapter]");
           if (!chapter)
             return target.getBoundingClientRect().top + window.scrollY;
@@ -217,6 +253,13 @@ export default function Motion() {
             0,
             layout.getBoundingClientRect().top + window.scrollY + offset - 88,
           );
+        };
+        const revealFocusedProject = (event: FocusEvent) => {
+          const project = (event.target as HTMLElement).closest<HTMLElement>(".project");
+          if (!horizontal || !project || !horizontal.gallery.contains(project)) return;
+          const bounds = project.getBoundingClientRect();
+          if (bounds.left < 0 || bounds.right > window.innerWidth)
+            lenis.scrollTo(destination(project), { duration: 0.75 });
         };
         const restoreHash = () => {
           let target: HTMLElement | null;
@@ -264,6 +307,7 @@ export default function Motion() {
         };
 
         document.addEventListener("click", navigate);
+        document.addEventListener("focusin", revealFocusedProject);
         window.addEventListener("popstate", restoreHash);
         window.addEventListener("hashchange", restoreHash);
         const refresh = () => {
@@ -273,7 +317,10 @@ export default function Motion() {
         };
         const frame = requestAnimationFrame(() => {
           refresh();
-          restoreHash();
+          if (!hasRestoredHash) {
+            restoreHash();
+            hasRestoredHash = true;
+          }
         });
         document.fonts.ready.then(refresh);
 
@@ -281,11 +328,13 @@ export default function Motion() {
           disposed = true;
           cancelAnimationFrame(frame);
           document.removeEventListener("click", navigate);
+          document.removeEventListener("focusin", revealFocusedProject);
           window.removeEventListener("popstate", restoreHash);
           window.removeEventListener("hashchange", restoreHash);
           gsap.ticker.remove(tick);
           lenis.destroy();
           delete root.dataset.motion;
+          delete root.dataset.gallery;
         };
       },
     );

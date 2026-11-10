@@ -68,7 +68,10 @@ export default function ParticlePortrait() {
       hover = 0,
       px = 0,
       py = 0,
-      scrollProgress = 0;
+      scrollProgress = 0,
+      homeX = 0,
+      homeY = 0,
+      homeScale = 1;
     const updateScene = () => {
       const intro = element.closest<HTMLElement>(".intro-sequence");
       const hero = intro?.querySelector<HTMLElement>(".hero");
@@ -162,6 +165,20 @@ export default function ParticlePortrait() {
         4.3 / (2 * Math.tan(THREE.MathUtils.degToRad(18)) * camera.aspect),
       );
       camera.updateProjectionMatrix();
+      const worldHeight =
+        2 * Math.tan(THREE.MathUtils.degToRad(18)) * camera.position.z;
+      if (r.width <= 700) {
+        const top = r.height <= 700 ? 285 : 300;
+        const bottom = r.height - 95;
+        const center = (top + bottom) / 2;
+        homeScale = Math.max(0.4, (bottom - top) / ((4.5 / worldHeight) * r.height));
+        homeX = 0;
+        homeY = ((r.height / 2 - center) / r.height) * worldHeight;
+      } else {
+        homeScale = (worldHeight * 0.78) / 4.5;
+        homeX = worldHeight * camera.aspect * 0.245;
+        homeY = -worldHeight * 0.015;
+      }
       updateScene();
     };
     const observer = new ResizeObserver(resize);
@@ -207,6 +224,9 @@ export default function ParticlePortrait() {
           ? 0
           : material.uniforms.uSpread.value +
             (targetSpread - material.uniforms.uSpread.value) * 0.12;
+        const spread = material.uniforms.uSpread.value;
+        portrait.position.set(homeX * (1 - spread), homeY * (1 - spread), 0);
+        portrait.scale.setScalar(homeScale + (1 - homeScale) * spread);
         renderer.render(scene, camera);
       }
       frame = requestAnimationFrame(render);
