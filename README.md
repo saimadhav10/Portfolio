@@ -19,6 +19,7 @@ A personal portfolio with an interactive particle portrait, selected projects, t
 | [Pookalam.io](https://github.com/saimadhav10/pookalam-io)  | Real-time multiplayer drawing game inspired by Onam.                       |
 | [COCTracker](https://github.com/saimadhav10/COCTracker)    | Offline-first Android companion for village progress and upgrade planning. |
 | [GameReviews](https://github.com/saimadhav10/game-reviews) | Community game ratings, reviews, and discussions.                          |
+| [Kochi Traffic](https://github.com/saimadhav10/Kochi-Traffic-Prediction-System) | Live traffic mapping and car/two-wheeler route comparison for Kochi. |
 
 ## Stack
 

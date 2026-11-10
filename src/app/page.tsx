@@ -154,6 +154,50 @@ export default function Home() {
                       />
                     </div>
                   </div>
+                ) : project.type === "traffic" ? (
+                  <div className="traffic-scene">
+                    <div className="traffic-caption">
+                      <span>LIVE TRAFFIC / ROUTE PLANNING</span>
+                      <strong>
+                        A clearer way
+                        <br />
+                        through <em>Kochi.</em>
+                      </strong>
+                      <p>CAR / TWO-WHEELER / NOW OR LATER</p>
+                    </div>
+                    <svg
+                      className="traffic-map"
+                      viewBox="0 0 460 460"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M30 0C170 90 10 180 120 260S100 390 210 460H0V0Z"
+                        fill="#acc9c5"
+                      />
+                      <g stroke="#a5b8a6" strokeWidth="2">
+                        <path d="M80 50L430 350M20 140L370 440M160 0L460 260M250 0L460 180M70 320L230 460" />
+                        <path d="M90 460L460 90M40 370L410 0M0 280L280 0M180 460L460 180M270 460L460 270" />
+                      </g>
+                      <path
+                        d="M130 350L205 275L205 210L300 115L375 115"
+                        stroke="#f5f1df"
+                        strokeWidth="18"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M130 350L205 275L205 210L300 115L375 115"
+                        stroke="#245e4d"
+                        strokeWidth="7"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                      />
+                      <path d="M205 275V210L245 170" stroke="#c28b3d" strokeWidth="7" />
+                      <circle cx="130" cy="350" r="12" fill="#f5f1df" stroke="#245e4d" strokeWidth="5" />
+                      <circle cx="375" cy="115" r="12" fill="#245e4d" stroke="#f5f1df" strokeWidth="5" />
+                    </svg>
+                  </div>
                 ) : (
                   <div className="reviews-scene">
                     <div className="reviews-caption">

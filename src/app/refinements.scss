@@ -1,4 +1,72 @@
 // Interaction and typography refinements.
+.traffic {
+  background: #dce3d5;
+  color: #183d32;
+}
+.traffic-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 70px 7%;
+  isolation: isolate;
+}
+.traffic-caption {
+  position: relative;
+  z-index: 1;
+  width: 62%;
+}
+.traffic-caption > span,
+.traffic-caption p {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+.traffic-caption strong {
+  display: block;
+  margin: 26px 0;
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 4.8vw, 70px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+.traffic-map {
+  position: absolute;
+  right: -5%;
+  top: 0;
+  height: 100%;
+  width: 53%;
+  opacity: 0.85;
+  mask-image: linear-gradient(to right, transparent, #000 30%);
+}
+.traffic .circle-arrow {
+  border-color: #183d3255;
+}
+@media (max-width: 600px) {
+  .traffic-scene {
+    padding: 60px 24px;
+    align-items: flex-start;
+  }
+  .traffic-caption {
+    width: 100%;
+  }
+  .traffic-caption strong {
+    font-size: clamp(32px, 8.5vw, 48px);
+    margin: 20px 0;
+  }
+  .traffic-caption > span,
+  .traffic-caption p {
+    font-size: 6px;
+  }
+  .traffic-map {
+    top: auto;
+    bottom: -24%;
+    right: -13%;
+    width: 75%;
+    height: 85%;
+    opacity: 0.5;
+  }
+}
 .about-bottom {
   grid-template-columns: minmax(0, 1fr);
   justify-items: end;

@@ -35,6 +35,18 @@ export const projects = [
     description:
       "Your games. Your verdict. GameReviews brings PC, console, and mobile players together to rate games, write reviews, and join threaded discussions. Community scores shape the Top 50, while votes surface daily highlights. Built with moderated submissions, spoiler controls, public anonymity options, and a searchable catalog that players can help expand.",
   },
+  {
+    id: "04",
+    title: "Kochi Traffic",
+    year: "TRAFFIC & ROUTE PLANNING",
+    repo: "https://github.com/saimadhav10/Kochi-Traffic-Prediction-System",
+    link: "https://kochi-traffic.saimadhav.workers.dev/",
+    action: "Explore Kochi Traffic",
+    type: "traffic",
+    tags: ["TypeScript", "MapLibre GL JS", "TomTom", "Cloudflare Workers", "D1"],
+    description:
+      "A clearer way through Kochi. Explore live road traffic, choose addresses or map points, and compare car or two-wheeler routes for departure now or in one hour. Distance, travel time, and arrival estimates make the options easier to compare. Built with server-side API protection and shared usage limits to keep the public service within its free-plan allowance.",
+  },
 ] as const;
 export const skills = [
   ["01", "Languages", "Python · Java · C · HTML · CSS"],
