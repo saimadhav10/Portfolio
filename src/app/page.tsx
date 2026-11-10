@@ -15,384 +15,400 @@ export default function Home() {
       </a>
       <Navigation />
       <main>
-        <section className="hero" id="home" aria-labelledby="hero-name">
-          <ParticlePortrait />
-          <div className="hero-copy hero-name">
-            <p className="eyebrow">A WORK IN CURIOSITY</p>
-            <h1 id="hero-name">Sai Madhav</h1>
-          </div>
-          <div className="hero-copy hero-role">
-            <p>
-              Computer Science student.
-              <br />
-              <span>Fascinated by data & numbers.</span>
-            </p>
-          </div>
-          <div className="hero-bottom">
-            <p>LEARNING. EXPLORING. BUILDING.</p>
-            <a href="#about">
-              SCROLL TO EXPLORE <span>↓</span>
-            </a>
-            <p className="hero-location">
-              KERALA, INDIA <span>↗</span>
-            </p>
-          </div>
-          <span className="hero-coordinate" aria-hidden="true">
-            DATA / NUMBERS / POSSIBILITIES
-          </span>
-        </section>
-        <section
-          className="about section"
-          id="about"
-          aria-labelledby="about-title"
-        >
-          <div className="section-label">
-            <span>01 / ABOUT</span>
-            <span>THE PERSON BEHIND THE PROJECTS</span>
-          </div>
-          <h2 id="about-title" className="statement" data-reveal>
-            I find meaning in numbers.
-            <br />
-            <span>
-              And possibility in what
-              <br className="desktop-break" /> I can build with them.
-            </span>
-          </h2>
-          <div className="about-bottom" data-reveal>
-            <div>
-              <p>
-                I’m Sai, a B.Tech Computer Science student specializing in Data
-                Science at Mar Athanasius College of Engineering, Kothamangalam.
-              </p>
-              <p>
-                I’m fascinated by the patterns hiding in data and the ideas that
-                become useful software. From exploring a dataset to building a
-                game with friends in mind, I learn best by making things.
-              </p>
-              <a className="text-link" href="#projects">
-                A few things I’ve made <span>↘</span>
-              </a>
-            </div>
-          </div>
-        </section>
-        <section
-          className="projects section"
-          id="projects"
-          aria-labelledby="projects-title"
-        >
-          <div className="section-label">
-            <span>02 / SELECTED WORK</span>
-            <span>IDEAS, TURNED INTO SOMETHING REAL</span>
-          </div>
-          <div className="section-heading">
-            <h2 id="projects-title" data-reveal>
-              Built out of
-              <br />
-              <em>curiosity.</em>
-            </h2>
-            <p>
-              Different projects. Different worlds.
-              <br />
-              The same urge to figure things out.
-            </p>
-          </div>
-          {projects.map((project) => (
-            <article
-              className="project"
-              id={`project-${project.type}`}
-              key={project.id}
+        <div className="chapter" data-chapter>
+          <div className="intro-sequence" data-chapter-surface>
+            <ParticlePortrait />
+            <section className="hero" id="home" aria-labelledby="hero-name">
+              <div className="hero-copy hero-name">
+                <p className="eyebrow">A WORK IN CURIOSITY</p>
+                <h1 id="hero-name">Sai Madhav</h1>
+              </div>
+              <div className="hero-copy hero-role">
+                <p>
+                  Computer Science student.
+                  <br />
+                  <span>Fascinated by data & numbers.</span>
+                </p>
+              </div>
+              <div className="hero-bottom">
+                <p>LEARNING. EXPLORING. BUILDING.</p>
+                <a href="#about">
+                  SCROLL TO EXPLORE <span>↓</span>
+                </a>
+                <p className="hero-location">
+                  KERALA, INDIA <span>↗</span>
+                </p>
+              </div>
+              <span className="hero-coordinate" aria-hidden="true">
+                DATA / NUMBERS / POSSIBILITIES
+              </span>
+            </section>
+            <section
+              className="about section"
+              id="about"
+              aria-labelledby="about-title"
             >
-              <a
-                className={`project-visual ${project.type}`}
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`${project.action}: ${project.title}`}
-              >
-                <div className="visual-top">
-                  <span>{project.year}</span>
-                  <span>EXPLORE PROJECT ↗</span>
-                </div>
-                {project.type === "pookalam" ? (
-                  <div className="flower-scene">
-                    <div className="flower" aria-hidden="true">
-                      {Array.from({ length: 12 }, (_, i) => (
-                        <i
-                          key={i}
-                          style={{ "--i": i } as React.CSSProperties}
-                        />
-                      ))}
-                      <b />
-                      <b />
-                    </div>
-                    <span className="flower-title">
-                      pookalam<span>.io</span>
-                    </span>
-                    <p>A LITTLE TRADITION. A LITTLE COMPETITION.</p>
-                  </div>
-                ) : project.type === "coc" ? (
-                  <div className="coc-scene">
-                    <div className="coc-caption">
-                      <span>
-                        YOUR VILLAGES.
-                        <br />
-                        YOUR UPGRADES.
-                      </span>
-                      <strong>
-                        One quiet
-                        <br />
-                        dashboard.
-                      </strong>
-                      <small>COCTracker / ANDROID</small>
-                    </div>
-                    <div className="phone">
-                      <div className="phone-speaker" />
-                      <img
-                        src="/images/coc-dashboard.png"
-                        alt="COCTracker village dashboard showing progress and upgrades"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                ) : project.type === "traffic" ? (
-                  <div className="traffic-scene">
-                    <div className="traffic-caption">
-                      <span>LIVE TRAFFIC / ROUTE PLANNING</span>
-                      <strong>
-                        A clearer way
-                        <br />
-                        through <em>Kochi.</em>
-                      </strong>
-                      <p>CAR / TWO-WHEELER / NOW OR LATER</p>
-                    </div>
-                    <svg
-                      className="traffic-map"
-                      viewBox="0 0 460 460"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M30 0C170 90 10 180 120 260S100 390 210 460H0V0Z"
-                        fill="#acc9c5"
-                      />
-                      <g stroke="#a5b8a6" strokeWidth="2">
-                        <path d="M80 50L430 350M20 140L370 440M160 0L460 260M250 0L460 180M70 320L230 460" />
-                        <path d="M90 460L460 90M40 370L410 0M0 280L280 0M180 460L460 180M270 460L460 270" />
-                      </g>
-                      <path
-                        d="M130 350L205 275L205 210L300 115L375 115"
-                        stroke="#f5f1df"
-                        strokeWidth="18"
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M130 350L205 275L205 210L300 115L375 115"
-                        stroke="#245e4d"
-                        strokeWidth="7"
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                      />
-                      <path d="M205 275V210L245 170" stroke="#c28b3d" strokeWidth="7" />
-                      <circle cx="130" cy="350" r="12" fill="#f5f1df" stroke="#245e4d" strokeWidth="5" />
-                      <circle cx="375" cy="115" r="12" fill="#245e4d" stroke="#f5f1df" strokeWidth="5" />
-                    </svg>
-                  </div>
-                ) : (
-                  <div className="reviews-scene">
-                    <div className="reviews-caption">
-                      <span>PC · CONSOLE · MOBILE</span>
-                      <strong>
-                        Your games.
-                        <br />
-                        <em>Your verdict.</em>
-                      </strong>
-                      <p>RATE / REVIEW / DISCUSS</p>
-                    </div>
-                    <div
-                      className="review-score"
-                      aria-label="Rate games on a scale of zero to ten"
-                    >
-                      <span>THE SCORE IS YOURS</span>
-                      <strong>0–10</strong>
-                      <span>EVERY PERSPECTIVE COUNTS</span>
-                    </div>
-                  </div>
-                )}
-                <div className="visual-bottom">
-                  <span>
-                    {project.id} / {String(projects.length).padStart(2, "0")}
-                  </span>
-                  <span className="circle-arrow">↗</span>
-                </div>
-              </a>
-              <div className="project-details" data-reveal>
+              <div className="section-label">
+                <span>01 / ABOUT</span>
+                <span>THE PERSON BEHIND THE PROJECTS</span>
+              </div>
+              <h2 id="about-title" className="statement" data-reveal>
+                I find meaning in numbers.
+                <br />
+                <span>
+                  And possibility in what
+                  <br className="desktop-break" /> I can build with them.
+                </span>
+              </h2>
+              <div className="about-bottom" data-reveal>
                 <div>
-                  <h3>{project.title}</h3>
-                  <div className="tags">
-                    {project.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p>{project.description}</p>
-                  <div className="project-links">
-                    <a
-                      className="text-link"
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {project.action} ↗
-                    </a>
-                    <a
-                      className="text-link muted"
-                      href={project.repo}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      View source ↗
-                    </a>
-                  </div>
+                  <p>
+                    I’m Sai, a B.Tech Computer Science student specializing in Data
+                    Science at Mar Athanasius College of Engineering, Kothamangalam.
+                  </p>
+                  <p>
+                    I’m fascinated by the patterns hiding in data and the ideas that
+                    become useful software. From exploring a dataset to building a
+                    game with friends in mind, I learn best by making things.
+                  </p>
+                  <a className="text-link" href="#projects">
+                    A few things I’ve made <span>↘</span>
+                  </a>
                 </div>
               </div>
-            </article>
-          ))}
-          <p className="more-work">
-            STILL LEARNING. STILL BUILDING. MORE TO COME. <span>↗</span>
-          </p>
-        </section>
-        <section
-          className="skills section"
-          id="skills"
-          aria-labelledby="skills-title"
-        >
-          <div className="section-label">
-            <span>03 / MY TOOLKIT</span>
+            </section>
           </div>
-          <div className="skills-layout">
-            <h2 id="skills-title" data-reveal>
-              Things I<br />
-              work with<span className="dot">.</span>
-            </h2>
-            <div className="skill-rows">
-              {skills.map(([id, title, items]) => (
-                <div className="skill-row" key={id} data-reveal>
-                  <span>{id}</span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{items}</p>
-                  </div>
-                  <span>↗</span>
-                </div>
-              ))}
+        </div>
+        <div className="chapter" data-chapter>
+          <section
+            className="projects section"
+            id="projects"
+            aria-labelledby="projects-title"
+            data-chapter-surface
+          >
+            <div className="section-label">
+              <span>02 / SELECTED WORK</span>
+              <span>IDEAS, TURNED INTO SOMETHING REAL</span>
             </div>
-          </div>
-        </section>
-        <section
-          className="resume section"
-          id="resume"
-          aria-labelledby="resume-title"
-        >
-          <div className="section-label">
-            <span>04 / RÉSUMÉ</span>
-            <span>THE STORY SO FAR</span>
-          </div>
-          <div className="resume-content" data-reveal>
-            <div>
-              <p className="eyebrow">SAI_MADHAV / RÉSUMÉ.PDF</p>
-              <h2 id="resume-title">
-                The story
+            <div className="section-heading">
+              <h2 id="projects-title" data-reveal>
+                Built out of
                 <br />
-                <em>so far.</em>
+                <em>curiosity.</em>
               </h2>
               <p>
-                My education, skills, and selected projects.
+                Different projects. Different worlds.
                 <br />
-                One page. Room to grow.
+                The same urge to figure things out.
               </p>
             </div>
-            <div className="resume-document">
-              <a
-                className="resume-sheet"
-                href="/Sai-Madhav-Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Preview Sai Madhav’s résumé"
+            {projects.map((project) => (
+              <article
+                className="project"
+                id={`project-${project.type}`}
+                key={project.id}
               >
-                <div className="sheet-top">
-                  <span>SM / 01</span>
-                  <span>↗</span>
-                </div>
-                <img
-                  src="/images/resume-preview.png"
-                  alt="One-page résumé preview: education, technical skills, and selected projects"
-                  loading="lazy"
-                />
-                <span className="sheet-bottom">
-                  OPEN DOCUMENT <span>↗</span>
-                </span>
-              </a>
-              <div className="resume-actions">
                 <a
-                  className="big-link"
+                  className={`project-visual ${project.type}`}
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${project.action}: ${project.title}`}
+                >
+                  <div className="visual-top">
+                    <span>{project.year}</span>
+                    <span>EXPLORE PROJECT ↗</span>
+                  </div>
+                  {project.type === "pookalam" ? (
+                    <div className="flower-scene">
+                      <div className="flower" aria-hidden="true">
+                        {Array.from({ length: 12 }, (_, i) => (
+                          <i
+                            key={i}
+                            style={{ "--i": i } as React.CSSProperties}
+                          />
+                        ))}
+                        <b />
+                        <b />
+                      </div>
+                      <span className="flower-title">
+                        pookalam<span>.io</span>
+                      </span>
+                      <p>A LITTLE TRADITION. A LITTLE COMPETITION.</p>
+                    </div>
+                  ) : project.type === "coc" ? (
+                    <div className="coc-scene">
+                      <div className="coc-caption">
+                        <span>
+                          YOUR VILLAGES.
+                          <br />
+                          YOUR UPGRADES.
+                        </span>
+                        <strong>
+                          One quiet
+                          <br />
+                          dashboard.
+                        </strong>
+                        <small>COCTracker / ANDROID</small>
+                      </div>
+                      <div className="phone">
+                        <div className="phone-speaker" />
+                        <img
+                          src="/images/coc-dashboard.png"
+                          alt="COCTracker village dashboard showing progress and upgrades"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  ) : project.type === "traffic" ? (
+                    <div className="traffic-scene">
+                      <div className="traffic-caption">
+                        <span>LIVE TRAFFIC / ROUTE PLANNING</span>
+                        <strong>
+                          A clearer way
+                          <br />
+                          through <em>Kochi.</em>
+                        </strong>
+                        <p>CAR / TWO-WHEELER / NOW OR LATER</p>
+                      </div>
+                      <svg
+                        className="traffic-map"
+                        viewBox="0 0 460 460"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M30 0C170 90 10 180 120 260S100 390 210 460H0V0Z"
+                          fill="#acc9c5"
+                        />
+                        <g stroke="#a5b8a6" strokeWidth="2">
+                          <path d="M80 50L430 350M20 140L370 440M160 0L460 260M250 0L460 180M70 320L230 460" />
+                          <path d="M90 460L460 90M40 370L410 0M0 280L280 0M180 460L460 180M270 460L460 270" />
+                        </g>
+                        <path
+                          d="M130 350L205 275L205 210L300 115L375 115"
+                          stroke="#f5f1df"
+                          strokeWidth="18"
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M130 350L205 275L205 210L300 115L375 115"
+                          stroke="#245e4d"
+                          strokeWidth="7"
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                        />
+                        <path d="M205 275V210L245 170" stroke="#c28b3d" strokeWidth="7" />
+                        <circle cx="130" cy="350" r="12" fill="#f5f1df" stroke="#245e4d" strokeWidth="5" />
+                        <circle cx="375" cy="115" r="12" fill="#245e4d" stroke="#f5f1df" strokeWidth="5" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <div className="reviews-scene">
+                      <div className="reviews-caption">
+                        <span>PC · CONSOLE · MOBILE</span>
+                        <strong>
+                          Your games.
+                          <br />
+                          <em>Your verdict.</em>
+                        </strong>
+                        <p>RATE / REVIEW / DISCUSS</p>
+                      </div>
+                      <div
+                        className="review-score"
+                        aria-label="Rate games on a scale of zero to ten"
+                      >
+                        <span>THE SCORE IS YOURS</span>
+                        <strong>0–10</strong>
+                        <span>EVERY PERSPECTIVE COUNTS</span>
+                      </div>
+                    </div>
+                  )}
+                  <div className="visual-bottom">
+                    <span>
+                      {project.id} / {String(projects.length).padStart(2, "0")}
+                    </span>
+                    <span className="circle-arrow">↗</span>
+                  </div>
+                </a>
+                <div className="project-details" data-reveal>
+                  <div>
+                    <h3>{project.title}</h3>
+                    <div className="tags">
+                      {project.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p>{project.description}</p>
+                    <div className="project-links">
+                      <a
+                        className="text-link"
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {project.action} ↗
+                      </a>
+                      <a
+                        className="text-link muted"
+                        href={project.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View source ↗
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+            <p className="more-work">
+              STILL LEARNING. STILL BUILDING. MORE TO COME. <span>↗</span>
+            </p>
+          </section>
+        </div>
+        <div className="chapter" data-chapter>
+          <section
+            className="skills section"
+            id="skills"
+            aria-labelledby="skills-title"
+            data-chapter-surface
+          >
+            <div className="section-label">
+              <span>03 / MY TOOLKIT</span>
+            </div>
+            <div className="skills-layout">
+              <h2 id="skills-title" data-reveal>
+                Things I<br />
+                work with<span className="dot">.</span>
+              </h2>
+              <div className="skill-rows">
+                {skills.map(([id, title, items]) => (
+                  <div className="skill-row" key={id} data-reveal>
+                    <span>{id}</span>
+                    <div>
+                      <h3>{title}</h3>
+                      <p>{items}</p>
+                    </div>
+                    <span>↗</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+        <div className="chapter" data-chapter>
+          <section
+            className="resume section"
+            id="resume"
+            aria-labelledby="resume-title"
+            data-chapter-surface
+          >
+            <div className="section-label">
+              <span>04 / RÉSUMÉ</span>
+              <span>THE STORY SO FAR</span>
+            </div>
+            <div className="resume-content" data-reveal>
+              <div>
+                <p className="eyebrow">SAI_MADHAV / RÉSUMÉ.PDF</p>
+                <h2 id="resume-title">
+                  The story
+                  <br />
+                  <em>so far.</em>
+                </h2>
+                <p>
+                  My education, skills, and selected projects.
+                  <br />
+                  One page. Room to grow.
+                </p>
+              </div>
+              <div className="resume-document">
+                <a
+                  className="resume-sheet"
                   href="/Sai-Madhav-Resume.pdf"
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="Preview Sai Madhav’s résumé"
                 >
-                  View résumé <span>↗</span>
+                  <div className="sheet-top">
+                    <span>SM / 01</span>
+                    <span>↗</span>
+                  </div>
+                  <img
+                    src="/images/resume-preview.png"
+                    alt="One-page résumé preview: education, technical skills, and selected projects"
+                    loading="lazy"
+                  />
+                  <span className="sheet-bottom">
+                    OPEN DOCUMENT <span>↗</span>
+                  </span>
                 </a>
-                <a className="text-link" href="/Sai-Madhav-Resume.pdf" download>
-                  Download PDF <span>↓</span>
-                </a>
+                <div className="resume-actions">
+                  <a
+                    className="big-link"
+                    href="/Sai-Madhav-Resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View résumé <span>↗</span>
+                  </a>
+                  <a className="text-link" href="/Sai-Madhav-Resume.pdf" download>
+                    Download PDF <span>↓</span>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-        <section
-          className="contact section"
-          id="contact"
-          aria-labelledby="contact-title"
-        >
-          <div className="section-label">
-            <span>05 / CONTACT</span>
-            <span>GOOD THINGS START WITH A CONVERSATION</span>
-          </div>
-          <div className="contact-heading" data-reveal>
-            <p>Have an idea, a question, or a shared curiosity?</p>
-            <h2 id="contact-title">
-              Connect
-              <br />
-              <em>with me.</em>
-              <span>↗</span>
-            </h2>
-          </div>
-          <div className="contact-layout">
-            <div className="socials">
-              <a
-                href="https://www.linkedin.com/in/saimadhav1"
-                target="_blank"
-                rel="noreferrer"
-              >
-                LinkedIn <span>↗</span>
-              </a>
-              <a
-                href="https://github.com/saimadhav10"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub <span>↗</span>
-              </a>
-              <p>
-                Open to conversations,
-                <br />
-                collaborations, and new perspectives.
-              </p>
+          </section>
+        </div>
+        <div className="chapter" data-chapter>
+          <section
+            className="contact section"
+            id="contact"
+            aria-labelledby="contact-title"
+            data-chapter-surface
+          >
+            <div className="section-label">
+              <span>05 / CONTACT</span>
+              <span>GOOD THINGS START WITH A CONVERSATION</span>
             </div>
-            <ContactForm />
-          </div>
-        </section>
+            <div className="contact-heading" data-reveal>
+              <p>Have an idea, a question, or a shared curiosity?</p>
+              <h2 id="contact-title">
+                Connect
+                <br />
+                <em>with me.</em>
+                <span>↗</span>
+              </h2>
+            </div>
+            <div className="contact-layout">
+              <div className="socials">
+                <a
+                  href="https://www.linkedin.com/in/saimadhav1"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn <span>↗</span>
+                </a>
+                <a
+                  href="https://github.com/saimadhav10"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub <span>↗</span>
+                </a>
+                <p>
+                  Open to conversations,
+                  <br />
+                  collaborations, and new perspectives.
+                </p>
+              </div>
+              <ContactForm />
+            </div>
+          </section>
+        </div>
       </main>
       <footer>
         <a className="wordmark" href="#home">

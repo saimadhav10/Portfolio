@@ -9,7 +9,8 @@ export default function ParticlePortrait() {
   useEffect(() => {
     const element = host.current;
     if (!element) return;
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+    let reduced = motionPreference.matches;
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
@@ -35,12 +36,19 @@ export default function ParticlePortrait() {
         uReveal: { value: reduced ? 1 : 0 },
         uHover: { value: 0 },
         uPointer: { value: new THREE.Vector2(10, 10) },
+        uSpread: { value: 0 },
       },
-      vertexShader: `attribute float aLight; attribute float aSeed; varying float vLight;
-        uniform float uTime; uniform float uPixel; uniform float uReveal; uniform float uHover; uniform vec2 uPointer;
-        void main(){vec3 p=position; vec4 mv=modelViewMatrix*vec4(p,1.0);
-        float front=1.0;
-        vec2 d=mv.xy-uPointer; float influence=exp(-dot(d,d)*5.0)*uHover*front;
+      vertexShader: `attribute float aLight; attribute float aSeed; attribute vec3 aSpread; varying float vLight;
+        uniform float uTime; uniform float uPixel; uniform float uReveal; uniform float uHover; uniform vec2 uPointer; uniform float uSpread;
+        void main(){
+        float spread=smoothstep(0.0,1.0,uSpread);
+        vec3 p=mix(position,aSpread,spread);
+        vec3 scatter=vec3(sin(aSeed*83.0),cos(aSeed*61.0),sin(aSeed*47.0));
+        p+=scatter*sin(spread*3.14159)*.3;
+        p.xy+=vec2(sin(uTime*.3+aSeed*30.0),cos(uTime*.25+aSeed*40.0))*spread*.07;
+        vec4 mv=modelViewMatrix*vec4(p,1.0);
+        float front=1.0-spread*.7;
+        vec2 d=mv.xy-uPointer; float influence=exp(-dot(d,d)*5.0)*uHover*(1.0-spread);
         mv.xy+=normalize(d+vec2(.001))*influence*.12;
         mv.z+=sin(aSeed*40.0+uTime*2.0)*influence*.12;
         mv.xy*=.88+.12*uReveal;
@@ -59,7 +67,23 @@ export default function ParticlePortrait() {
       loadedAt = 0,
       hover = 0,
       px = 0,
-      py = 0;
+      py = 0,
+      scrollProgress = 0;
+    const updateScene = () => {
+      const intro = element.closest<HTMLElement>(".intro-sequence");
+      const hero = intro?.querySelector<HTMLElement>(".hero");
+      scrollProgress =
+        intro && hero
+          ? THREE.MathUtils.clamp(
+              -intro.getBoundingClientRect().top / hero.offsetHeight, 0, 1,
+            )
+          : 0;
+    };
+    const updatePreference = () => {
+      reduced = motionPreference.matches;
+    };
+    motionPreference.addEventListener("change", updatePreference);
+    window.addEventListener("scroll", updateScene, { passive: true });
     const pointer = new THREE.Vector2(10, 10);
     const image = new Image();
     image.onload = () => {
@@ -113,7 +137,18 @@ export default function ParticlePortrait() {
         "aSeed",
         new THREE.Float32BufferAttribute(seeds, 1),
       );
-      geometry.computeBoundingSphere();
+      const spread: number[] = [];
+      const count = seeds.length;
+      for (let index = 0; index < count; index++) {
+        spread.push(
+          (Math.random() - 0.5) * 11,
+          (Math.random() - 0.5) * 7,
+          (Math.random() - 0.5) * 3.5,
+        );
+      }
+      geometry.setAttribute("aSpread", new THREE.Float32BufferAttribute(spread, 3));
+      // Include the outward paths as well as the original portrait in the bounds.
+      geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 8);
       loadedAt = performance.now();
       element.classList.add("ready");
     };
@@ -127,6 +162,7 @@ export default function ParticlePortrait() {
         4.3 / (2 * Math.tan(THREE.MathUtils.degToRad(18)) * camera.aspect),
       );
       camera.updateProjectionMatrix();
+      updateScene();
     };
     const observer = new ResizeObserver(resize);
     observer.observe(element);
@@ -153,12 +189,10 @@ export default function ParticlePortrait() {
     window.addEventListener("pointermove", move, { passive: true });
     document.addEventListener("pointerleave", leave);
     const start = performance.now();
-    let rotation = 0;
     const render = () => {
       if (disposed) return;
       const now = performance.now();
       if (visible && !document.hidden) {
-        rotation = reduced ? 0 : Math.sin((now - start) / 5000) * 0.035;
         material.uniforms.uTime.value = reduced ? 0 : (now - start) / 1000;
         material.uniforms.uReveal.value = reduced
           ? 1
@@ -168,11 +202,11 @@ export default function ParticlePortrait() {
         material.uniforms.uPointer.value.lerp(pointer, 0.1);
         material.uniforms.uHover.value +=
           ((reduced ? 0 : hover) - material.uniforms.uHover.value) * 0.08;
-        portrait.rotation.y +=
-          (rotation + (reduced ? 0 : px * 0.18 * hover) - portrait.rotation.y) *
-          0.035;
-        portrait.rotation.x +=
-          ((reduced ? 0 : py * 0.12 * hover) - portrait.rotation.x) * 0.035;
+        const targetSpread = reduced ? 0 : scrollProgress;
+        material.uniforms.uSpread.value = reduced
+          ? 0
+          : material.uniforms.uSpread.value +
+            (targetSpread - material.uniforms.uSpread.value) * 0.12;
         renderer.render(scene, camera);
       }
       frame = requestAnimationFrame(render);
@@ -185,6 +219,8 @@ export default function ParticlePortrait() {
       observer.disconnect();
       visibility.disconnect();
       window.removeEventListener("pointermove", move);
+      window.removeEventListener("scroll", updateScene);
+      motionPreference.removeEventListener("change", updatePreference);
       document.removeEventListener("pointerleave", leave);
       geometry.dispose();
       material.dispose();
