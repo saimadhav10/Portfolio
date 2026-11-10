@@ -30,7 +30,7 @@ export default function Motion() {
         gsap.set(chapters, { zIndex: (index) => index + 1 });
 
         if (desktop) {
-          chapters.slice(0, -1).forEach((chapter) => {
+          chapters.slice(0, 1).forEach((chapter) => {
             const surface = chapter.querySelector<HTMLElement>(
               "[data-chapter-surface]",
             );
@@ -55,6 +55,7 @@ export default function Motion() {
         }
 
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
+          if (element.closest("#skills, #resume, #contact")) return;
           gsap.fromTo(
             element,
             { y: desktop ? 65 : 28, autoAlpha: 0 },
@@ -99,6 +100,103 @@ export default function Motion() {
               },
             },
           );
+        });
+
+        // The closing sections move through their content, rather than pinning
+        // entire screens into another stack of cards.
+        gsap.fromTo("#skills-title", { y: 45 }, {
+          y: -25,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#skills",
+            start: "top 85%",
+            end: "bottom 20%",
+            scrub: true,
+          },
+        });
+        gsap.utils.toArray<HTMLElement>(".skill-row").forEach((row, index) => {
+          gsap.fromTo(row, {
+            x: (index % 2 ? 1 : -1) * (desktop ? 85 : 25),
+            opacity: 0.2,
+            "--row-line": 0,
+          }, {
+            x: 0,
+            opacity: 1,
+            "--row-line": 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: row,
+              start: "top 95%",
+              end: "top 68%",
+              scrub: true,
+            },
+          });
+        });
+        gsap.fromTo(".resume-content > div:first-child > *", {
+          y: 45,
+          opacity: 0.15,
+        }, {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".resume-content",
+            start: "top 90%",
+            end: "top 45%",
+            scrub: true,
+          },
+        });
+        gsap.fromTo(".resume-document", {
+          x: desktop ? 100 : 0,
+          y: desktop ? 140 : 65,
+          opacity: 0.15,
+        }, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".resume-document",
+            start: "top 95%",
+            end: "top 40%",
+            scrub: true,
+          },
+        });
+        gsap.fromTo(".contact-heading h2", { x: desktop ? -70 : -20 }, {
+          x: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".contact-heading",
+            start: "top 95%",
+            end: "top 45%",
+            scrub: true,
+          },
+        });
+        gsap.fromTo(".contact-heading h2 > span", { x: 70, y: -45, opacity: 0.2 }, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".contact-heading",
+            start: "top 85%",
+            end: "top 35%",
+            scrub: true,
+          },
+        });
+        gsap.utils.toArray<HTMLElement>(".socials > *, .contact-form > *").forEach((element) => {
+          gsap.fromTo(element, { y: 35, opacity: 0.3 }, {
+            y: 0,
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 97%",
+              end: "top 75%",
+              scrub: true,
+            },
+          });
         });
 
         // Anchor positions come from normal layout, even during a pinned transition.

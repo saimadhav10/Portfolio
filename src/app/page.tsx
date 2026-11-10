@@ -339,6 +339,8 @@ export default function Home() {
                   </div>
                   <img
                     src="/images/resume-preview.png"
+                    width={1061}
+                    height={1500}
                     alt="One-page résumé preview: education, technical skills, and selected projects"
                     loading="lazy"
                   />
